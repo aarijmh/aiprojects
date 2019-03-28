@@ -3,6 +3,8 @@ Created on Mar 6, 2019
 
 @author: dr.aarij
 '''
+import copy
+from copy import deepcopy
 
 class Assignment(object):
     '''
@@ -46,9 +48,20 @@ class Assignment(object):
             if not self.hasAssignmentFor(var):
                 return False        
         return True
+    
+    def returnCopy(self):
+        variables = deepcopy(self._variables)
+        values = deepcopy(self._valueOfVariable)
+        
+        assignment = Assignment()
+        
+        assignment._variables = variables
+        assignment._valueOfVariable = values
+        
+        return assignment
 
     def isSolution(self,csp):
-        return self.isComplete(csp.getVariables()) and self.isConsistent(csp.getConstraints())
+        return self.isComplete(csp.getVariables()) and self.isConsistent(csp.getListOfConstraints())
     
     def __str__(self):
         result = []

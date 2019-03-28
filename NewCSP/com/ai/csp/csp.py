@@ -15,6 +15,7 @@ import time
 from com.ai.csp.constraints.unaryNumericConstraint import UnaryNumericConstraint
 from com.ai.csp.constraints.allDifferentConstraint import AllDifferentConstraint
 from com.ai.csp.inference.arcConsistencyInference import ArcConsistencyInference
+from com.ai.csp.strategy.localsearch import LocalSearch
 
 
 class CSP(object):
@@ -101,6 +102,9 @@ class CSP(object):
         
     def getListOfConstraints(self):
         return self._constraints
+    
+    def getListOfDomains(self):
+        return self._domain
     
     def getNeighboursOfVariableExcept(self,var1,var2):
         neigh = []
@@ -202,14 +206,14 @@ def createNQueenCSP(n = 4):
 
 if __name__ == "__main__":
 #     csp = createMapColoringCSP() 
-    csp = createNQueenCSP(35)
+    csp = createNQueenCSP(10)
 #     csp = createSudokuCSP()
      
     inPro = SimpleInference()
     inPro = ForwardCheckingInference()
     inPro = ArcConsistencyInference()     
     bts = BactrackingSearch(inPro,[ConsoleListener()],variableOrdering = True)
-     
+    bts = LocalSearch(inPro,[ConsoleListener()],variableOrdering = True) 
      
      
     start = time.time()    
