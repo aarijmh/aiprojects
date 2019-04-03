@@ -1,1 +1,6 @@
 /__init__.cpython-36.pyc
+/__init__.cpython-37.pyc
+/allDifferentConstraint.cpython-37.pyc
+/notAttackingConstraint.cpython-37.pyc
+/notEqualConstraint.cpython-37.pyc
+/unaryNumericConstraint.cpython-37.pyc

@@ -1,1 +1,6 @@
 /__init__.cpython-36.pyc
+/__init__.cpython-37.pyc
+/arcConsistencyInference.cpython-37.pyc
+/forwardCheckingInference.cpython-37.pyc
+/inferenceInfo.cpython-37.pyc
+/simpleInference.cpython-37.pyc
