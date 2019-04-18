@@ -1,4 +1,3 @@
-from copy import deepcopy
 import sys
 class MDP(object):
     
@@ -8,12 +7,14 @@ class MDP(object):
         self._transition = transition
         self._reward = reward
         self._discount = discount
-        self._intitial_v = [ 0 for _ in states]
-        self._intitial_q = [[0 for _ in states] for _ in actions]
+        self._initial_v = [ 0 for _ in states]
+        self._initial_q = [[0 for _ in actions] for _ in states]
         
-    def valueIteration(self,initial_v,iterations = 0):
-        previousMatrix = deepcopy(initial_v)
-                        
+    def valueIteration(self,iterations = 0,threshold = 0.000000001):
+        previousMatrix = self._initial_v
+        returnQMatrix = [[0 for _ in self._actions] for _ in self._states]
+        
+        delta = 0.0
         for _ in range(iterations):
             returnMatrix = [ 0 for _ in self._states]
             for s in range(len(self._states)):
@@ -26,8 +27,12 @@ class MDP(object):
                         continue
                     for sp, prob in possibleOutcomes:
                         actionValue += prob * (self._reward(s,a,sp) + self._discount * previousMatrix[sp])
+                    returnQMatrix[s][a] = actionValue
                     maxValue = max(maxValue,actionValue)
                 returnMatrix[s] = maxValue
+                delta = max(delta, abs(previousMatrix[s] - returnMatrix[s]))
             previousMatrix = returnMatrix
+            if delta < threshold:
+                break
                         
-        return previousMatrix
+        return previousMatrix, returnQMatrix
