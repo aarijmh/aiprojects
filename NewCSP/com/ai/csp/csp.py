@@ -72,6 +72,18 @@ class CSP(object):
             return []
         return self._contraintsOfVariable[var]
     
+    
+    def getAllConstraintsOfVariable(self,var):
+        constraintList = []
+        if var not in self._contraintsOfVariable:
+            return []
+        for _,v in self._contraintsOfVariable.items():
+            for variableConstraint in v:
+                if var in variableConstraint.getScope():
+                    if variableConstraint not in constraintList:
+                        constraintList.append(variableConstraint)
+        return constraintList
+    
     def getVariableDomains(self):
         return self._domainOfVariable
     
@@ -210,9 +222,9 @@ if __name__ == "__main__":
 #     csp = createSudokuCSP()
      
     inPro = SimpleInference()
-    inPro = ForwardCheckingInference()
-    inPro = ArcConsistencyInference()     
-    bts = BactrackingSearch(inPro,[ConsoleListener()],variableOrdering = True)
+#     inPro = ForwardCheckingInference()
+#     inPro = ArcConsistencyInference()     
+#     bts = BactrackingSearch(inPro,[ConsoleListener()],variableOrdering = True)
     bts = LocalSearch(inPro,[ConsoleListener()],variableOrdering = True) 
      
      
