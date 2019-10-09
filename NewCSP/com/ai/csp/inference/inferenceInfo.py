@@ -19,7 +19,7 @@ class InferenceInfo(object):
 
     def isFailure(self,csp,variable,value):
         for av in self._affectedVariables:
-            if len(av[1]) == 0:
+            if len(self._affectedVariablesMap[av]) == 0:
                 return True
         return False
     
@@ -31,6 +31,7 @@ class InferenceInfo(object):
     
     def addToAffectedVariables(self,var,domainList):
         self._affectedVariablesMap[var] = domainList
+        self._affectedVariables.append(var)
     
     def getDomainsOfAffectedVariables(self,var):
         if var in self._affectedVariablesMap:

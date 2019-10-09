@@ -120,7 +120,7 @@ class GuiHandler(object):
         
 if __name__ == "__main__":
     bd = GuiHandler()
-    csp = NQueenGameBoard(bd.root)
+#     csp = NQueenGameBoard(bd.root)
     csp = CSPGameBoard(bd.root)
     bd.initializeCSPGUI(csp)
     

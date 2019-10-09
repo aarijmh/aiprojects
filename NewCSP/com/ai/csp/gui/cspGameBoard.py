@@ -59,18 +59,12 @@ class CSPGameBoard(Frame):
                 y2 = y1 + self.size
                 self.canvas.create_rectangle(x1, y1, x2, y2, outline="black", fill=color, tags="square")
                 color = self.color1 if color == self.color2 else self.color2
-                self.canvas.create_text(x1+30, y1+20,fill="darkblue", tags="text",width=50,font="Times 8 italic bold",
-                        text=self.csp.getDomainValues(self.csp.getVariables()[row * 9 + col]))
-#         for name in self.pieces:
-#             x1 = (self.pieces[name][0] * self.size) + 5
-#             y1 = (self.pieces[name][1] * self.size) + 5
-#             x2 = x1 + self.size - 10
-#             y2 = y1 + self.size - 10
-#             self.canvas.create_rectangle(x1, y1, x2, y2, outline="black", fill="green", tags="square")
-#             self.otherConstraints(self.pieces[name][0],self.pieces[name][1])
-#             
-#             self.placepiece(name, self.pieces[name][0], self.pieces[name][1])
-#             self.canvas.tag_raise(name)
+                val = self.assignment.getAssignmentOfVariable(self.csp.getVariables()[row * 9 + col])
+                
+                if val == None:
+                    val = self.csp.getDomainValues(self.csp.getVariables()[row * 9 + col])                
+                self.canvas.create_text(x1+30, y1+20,fill="darkblue", tags="text",width=50,font="Times 8 italic bold",text=val)
+                
         self.canvas.tag_raise("text")
         self.canvas.tag_raise("piece")
         self.canvas.tag_lower("square")
