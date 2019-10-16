@@ -69,38 +69,16 @@ class LocalSearch(SearchStrategy):
             assignment.addVariableToAssignment(var,val)
             count = 0
             for con in constraints:
-                if assignment.isConsistent([con]):
+                if not assignment.isConsistent([con]):
                     count+=1
             if count <= minConflict:
                 if count < minConflict:
                     candidates = []
-                    count = minConflict
+                    minConflict = count
                 candidates.append(val)
                 
         return candidates[random.randint(0,len(candidates)-1)]
-    
-#     def getMinConflictValueFor(self,var,csp):
-#         
-#         constraints = csp.getAllConstraintsOfVariable(var)
-#         assignment = self._assignment.returnCopy()
-#         minConflict = 100000000000
-#         candidates = []
-#         
-#         for val in csp.getDomainValues(var):
-#             if val == self._assignment.getAssignmentOfVariable(var):
-#                 continue
-#             assignment.addVariableToAssignment(var,val)
-#             count = 0
-#             for con in constraints:
-#                 if assignment.isConsistent([con]):
-#                     count+=1
-#             if count <= minConflict:
-#                 if count < minConflict:
-#                     candidates = []
-#                     minConflict = count
-#                 candidates.append(val)
-#                 
-#         return candidates[random.randint(0,len(candidates)-1)]
+
     
     def fireListeners(self,csp,assignment):
         for listener in self._listeners:

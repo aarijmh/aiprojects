@@ -218,7 +218,7 @@ def createNQueenCSP(n = 4):
 
 if __name__ == "__main__":
 #     csp = createMapColoringCSP() 
-    csp = createNQueenCSP(10)
+    csp = createNQueenCSP(200)
 #     csp = createSudokuCSP()
      
     inPro = SimpleInference()
