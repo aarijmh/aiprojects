@@ -70,10 +70,10 @@ class GridMDP(object):
         
 
 if __name__ == "__main__":
-    grid = GridMDP("grid.txt",livingReward=-2.0)
+    grid = GridMDP("grid.txt", livingReward=-2.0)
     mdp = MDP(grid._states, grid._actions, grid.transition, grid.reward, .9)
-    v = mdp.policyIteration() 
-    print(v[0])
+    v = mdp.qvalueIteration()
+    # print(v[0])
     print(v[1])
 
         
